@@ -1,0 +1,32 @@
+.hero-section {
+    height: 100vh;
+    width: 100%;
+    background-image: url("/assets/smetovi-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Position relative to allow absolute positioning of the pseudo-element */
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Black overlay with transparency */
+        z-index: 1; /* Layer the overlay above the background */
+    }
+
+    .text-content {
+        display: flex;
+        align-items: center;  /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        position: relative; /* This ensures the text is above the overlay */
+        height: 100%; /* Full height to ensure centering works */
+        color: white; /* Text color */
+        z-index: 2; /* Ensures the text is above the overlay */
+        font-size: 40px;
+        font-family: math;
+        flex-direction: column;
+    }
+}
