@@ -24,6 +24,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Run vulnerability check
+      run: npm audit --audit-level=moderate # specify audit level: low, moderate, high, critical
+
     - name: Run tests
       run: npm test -- --watch=false --browsers=ChromeHeadless
 
@@ -34,7 +37,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: angular-build
-        path: "./dist/"
+        path: "./dist/smetovi/"
 
   deploy:
     needs: build
@@ -46,14 +49,14 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: angular-build
-        path: "./dist/"
+        path: "./dist/smetovi/"
     - name: Deploy to cPanel hosting via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/  # Adjust this to match your project name
+        local-dir: ./dist/smetovi/  # Adjust this to match your project name
         server-dir: /public_html/ # Adjust this to your target directory on the server
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
