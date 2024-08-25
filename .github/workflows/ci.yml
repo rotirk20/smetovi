@@ -19,10 +19,13 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '14' # specify the Node.js version
+        node-version: '20' # specify the Node.js version
 
     - name: Install dependencies
       run: npm install
+
+    - name: Run vulnerability check
+      run: npm audit --audit-level=moderate # specify audit level: low, moderate, high, critical
 
     - name: Run tests
       run: npm test -- --watch=false --browsers=ChromeHeadless
@@ -31,10 +34,10 @@ jobs:
       run: npm run build
 
     - name: upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: angular-build
-        path: "./dist/"
+        path: "./dist/smetovi/"
 
   deploy:
     needs: build
@@ -43,17 +46,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: download artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: angular-build
-        path: "./dist/"
+        path: "./dist/smetovi/"
     - name: Deploy to cPanel hosting via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/  # Adjust this to match your project name
+        local-dir: ./dist/smetovi/  # Adjust this to match your project name
         server-dir: /public_html/ # Adjust this to your target directory on the server
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
