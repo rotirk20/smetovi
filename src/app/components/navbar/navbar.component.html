@@ -1,0 +1,35 @@
+<nav class="bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <!-- Website Name on the Left -->
+            <div class="flex items-center">
+                <a href="/" class="text-xl font-semibold text-gray-900 font-mountain">SMETOVI</a>
+            </div>
+
+            <!-- Navigation Menu on the Right -->
+            <div class="hidden sm:flex space-x-8 items-center">
+                <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}" class="text-sm font-medium hover:text-gray-700 font-mountain">Početna</a>
+                <a routerLink="/lokacije" routerLinkActive="text-blue-500" class="text-sm font-medium hover:text-gray-700 font-mountain">Lokacije</a>
+                <a routerLink="/kontakt" routerLinkActive="text-blue-500" class="text-sm font-medium hover:text-gray-700 font-mountain">Kontakt</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="sm:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="sm:hidden hidden">
+        <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 font-mountain">Početna</a>
+        <a routerLink="/lokacije" routerLinkActive="text-blue-500" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 font-mountain">Lokacije</a>
+        <a routerLink="/lokacije" routerLinkActive="text-blue-500" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 font-mountain">Kontakt</a>
+    </div>
+</nav>
