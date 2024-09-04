@@ -25,7 +25,7 @@ jobs:
       run: npm install
 
     - name: Run vulnerability check
-      run: npm audit --audit-level=moderate # specify audit level: low, moderate, high, critical
+      run: npm audit --audit-level=low # specify audit level: low, moderate, high, critical
 
     - name: Run tests
       run: npm test -- --watch=false --browsers=ChromeHeadless
