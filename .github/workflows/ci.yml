@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - main  # Trigger deployment only on push to main
   pull_request:
     branches:
-      - main
+      - main  # Run build checks on PRs but don't deploy
 
 jobs:
   build:
@@ -24,36 +24,42 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # Optional: Uncomment if you want to run tests
     # - name: Run tests
     #   run: npm test -- --watch=false --browsers=ChromeHeadless
 
     - name: Build project
       run: npm run build
 
-    - name: upload artifact
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: angular-build
         path: "./dist/smetovi/"
 
   deploy:
+    # Deploy only when a push is made directly to the main branch
+    if: github.ref == 'refs/heads/main'  # Ensure deployment happens only on push to main
     needs: build
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: download artifact
+
+    - name: Download artifact
       uses: actions/download-artifact@v4
       with:
         name: angular-build
         path: "./dist/smetovi/"
+
     - name: Deploy to cPanel hosting via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/smetovi/  # Adjust this to match your project name
+        local-dir: ./dist/smetovi/  # Adjust this to match your project build output
         server-dir: /public_html/ # Adjust this to your target directory on the server
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
