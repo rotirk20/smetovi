@@ -72,7 +72,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: angular-build
-        path: ./frontend/dist/smetovi/  # Download the Angular build
+        path: ./frontend/dist/smetovi/  # Ensure this is your Angular build folder
 
     - name: Deploy frontend to cPanel via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -80,11 +80,12 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./frontend/dist/smetovi/  # Deploy directly to the root
-        server-dir: /public_html/  # Path where frontend files are deployed on server
+        local-dir: ./frontend/dist/smetovi/  # Deploy the actual files
+        server-dir: /public_html/  # Upload to the existing public_html folder
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
-        delete: true  # Optional: Remove old files in the target directory
+        overwrite: true  # Overwrite existing files
+        delete: true  # Optional: Delete old files in the directory to avoid conflicts
 
   # --- Deploy Backend ---
   deploy-backend:
@@ -111,3 +112,4 @@ jobs:
         server-dir: /public_html/backend/  # Adjust the path as necessary
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
+        overwrite: true  # Overwrite existing files
