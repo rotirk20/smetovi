@@ -99,7 +99,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: backend-artifact
-        path: ./backend  # Download the backend code
+        path: ./backend/  # This should be a directory with a trailing slash
 
     - name: Deploy backend to cPanel via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -107,7 +107,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./backend  # Deploy the entire backend folder
-        server-dir: /public_html/backend/  # Path where backend files are deployed on server
+        local-dir: ./backend/  # Ensure this is a directory with a trailing slash
+        server-dir: /public_html/backend/  # Adjust the path as necessary
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
