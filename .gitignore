@@ -8,6 +8,7 @@
 /frontend/bazel-out
 /backend/node_modules
 /backend/tmp
+/backend/.env
 
 # Node
 /node_modules
