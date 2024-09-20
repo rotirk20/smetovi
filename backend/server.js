@@ -23,6 +23,11 @@ db.connect((err) => {
     console.log('Connected to MySQL database');
 });
 
+// Determine if the environment is production or development
+const frontendPath = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, '../../public_html') // For cPanel (production)
+    : path.join(__dirname, '../frontend/dist/smetovi'); // For local development
+
 // Serve the Angular frontend
 app.use(express.static(path.join(__dirname, '../frontend/dist/smetovi')));
 
@@ -38,7 +43,7 @@ app.get('/api/data', (req, res) => {
 
 // Handle Angular routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/smetovi/index.html'));
+    res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 app.listen(PORT, () => {
