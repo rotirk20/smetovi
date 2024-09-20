@@ -3,63 +3,110 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger deployment only on push to main
+      - main  # Trigger deployment only on push to the main branch
   pull_request:
     branches:
-      - main  # Run build checks on PRs but don't deploy
+      - main  # Run checks on PRs, but don't deploy
 
 jobs:
-  build:
+  # --- Build Frontend ---
+  build-frontend:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      
-    - name: Set up Node.js
+
+    - name: Set up Node.js for frontend
       uses: actions/setup-node@v3
       with:
-        node-version: '20' # specify the Node.js version
+        node-version: '20'  # Specify the Node.js version
 
-    - name: Install dependencies
+    - name: Install frontend dependencies
+      working-directory: ./frontend  # Navigate to the frontend folder
       run: npm install
 
-    # Optional: Uncomment if you want to run tests
-    # - name: Run tests
-    #   run: npm test -- --watch=false --browsers=ChromeHeadless
-
-    - name: Build project
+    - name: Build frontend
+      working-directory: ./frontend
       run: npm run build
 
-    - name: Upload artifact
+    - name: Upload frontend artifact
       uses: actions/upload-artifact@v4
       with:
         name: angular-build
-        path: "./dist/smetovi/"
+        path: ./frontend/dist/  # Path to Angular build files
 
-  deploy:
-    # Deploy only when a push is made directly to the main branch
-    if: github.ref == 'refs/heads/main'  # Ensure deployment happens only on push to main
-    needs: build
+  # --- Build Backend ---
+  build-backend:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Download artifact
+    - name: Set up Node.js for backend
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  # Specify the Node.js version
+
+    - name: Install backend dependencies
+      working-directory: ./backend  # Navigate to the backend folder
+      run: npm install
+
+    - name: Upload backend artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-artifact
+        path: ./backend  # Upload the backend folder for deployment
+
+  # --- Deploy Frontend ---
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: build-frontend  # Ensure the frontend build completes before deployment
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download frontend artifact
       uses: actions/download-artifact@v4
       with:
         name: angular-build
-        path: "./dist/smetovi/"
+        path: ./frontend/dist/  # Download the Angular build
 
-    - name: Deploy to cPanel hosting via FTP
+    - name: Deploy frontend to cPanel via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/smetovi/  # Adjust this to match your project build output
-        server-dir: /public_html/ # Adjust this to your target directory on the server
+        local-dir: ./frontend/dist/  # Adjust this to match your project build output
+        server-dir: /public_html/frontend/  # Path where frontend files are deployed on server
+        port: ${{ secrets.FTP_PORT }}
+        log-level: verbose
+
+  # --- Deploy Backend ---
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: build-backend  # Ensure the backend build completes before deployment
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download backend artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: backend-artifact
+        path: ./backend  # Download the backend code
+
+    - name: Deploy backend to cPanel via FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./backend  # Deploy the entire backend folder
+        server-dir: /public_html/backend/  # Path where backend files are deployed on server
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
