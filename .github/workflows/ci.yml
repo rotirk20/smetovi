@@ -84,8 +84,7 @@ jobs:
         server-dir: /public_html/  # Upload to the existing public_html folder
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
-        overwrite: true  # Overwrite existing files
-        delete: true  # Optional: Delete old files in the directory to avoid conflicts
+        force: true  # This will re-upload all files, even unchanged ones
 
   # --- Deploy Backend ---
   deploy-backend:
@@ -100,7 +99,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: backend-artifact
-        path: ./backend/  # This should be a directory with a trailing slash
+        path: ./backend/  # Download the backend files
 
     - name: Deploy backend to cPanel via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -108,8 +107,8 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./backend/  # Ensure this is a directory with a trailing slash
-        server-dir: /public_html/backend/  # Adjust the path as necessary
+        local-dir: ./backend/  # Path to your backend build
+        server-dir: /api/  # Deploy directly to /api/ folder
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
-        overwrite: true  # Overwrite existing files
+        force: true  # This will re-upload all files, even unchanged ones
