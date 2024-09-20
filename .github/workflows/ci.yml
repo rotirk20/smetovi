@@ -34,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: angular-build
-        path: ./frontend/dist/  # Path to Angular build files
+        path: ./frontend/dist/smetovi/  # Path to Angular build files
 
   # --- Build Backend ---
   build-backend:
@@ -80,11 +80,11 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./frontend/dist/smetovi/  # Adjust this to match your project build output
-        server-dir: /public_html/frontend/  # Path where frontend files are deployed on server
+        local-dir: ./frontend/dist/smetovi/  # Deploy directly to the root
+        server-dir: /public_html/  # Path where frontend files are deployed on server
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
-        delete: true  # Add this to clean the target directory before deploying
+        delete: true  # Optional: Remove old files in the target directory
 
   # --- Deploy Backend ---
   deploy-backend:
@@ -107,8 +107,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./backend/  # Adjust this to the correct backend build folder
+        local-dir: ./backend  # Deploy the entire backend folder
         server-dir: /public_html/backend/  # Path where backend files are deployed on server
         port: ${{ secrets.FTP_PORT }}
         log-level: verbose
-        delete: true  # Add this to clean the target directory before deploying
