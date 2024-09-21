@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocationCardComponent } from 'src/app/location-card/location-card.component';
-import { Location } from 'src/app/location-card/location-card.component';
+import { LocationCardComponent } from 'src/app/components/location-card/location-card.component';
+import { Location } from 'src/app/components/location-card/location-card.component';
 
 const DUMMY_LOCATIONS = [
   {
