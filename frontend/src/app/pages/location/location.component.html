@@ -1,12 +1,18 @@
-<main class="flex h-screen items-center justify-center bg-gray-100">
-  <div class="w-full lg:flex">
-    <div class="lg:w-1/2">
+<main class="flex items-center justify-center bg-gray-100">
+  <div class="w-full lg:flex container">
+    <div class="lg:w-1/2 py-6 px-4">
       <ng-container *ngFor="let locationItem of locations">
         <app-location-card [location]="locationItem"></app-location-card>
       </ng-container>
     </div>
-    <div class="lg:w-1/2">
-     <!-- <h1>Google map</h1> -->
+    <div class="lg:w-1/2 w-full">
+      <google-map
+      height="100vh"
+      width="100%"
+      [zoom]="zoom"
+      [center]="center"
+      [options]="options"
+    ></google-map>
     </div>
   </div>
 </main>
