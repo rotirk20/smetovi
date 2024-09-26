@@ -1,28 +1,21 @@
-const db = require('../config/db');
+import { Location, User } from '../models/index.js';
+import HttpError from '../models/HttpError.js';
+
 
 // Get all locations
-const getAllLocations = (req, res) => {
-    db.query('SELECT * FROM locations', (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.json(results);
-    });
-};
-
-// Add a new location
-const addLocation = (req, res) => {
-    const { name, latitude, longitude } = req.body;
-    if (!name || !latitude || !longitude) {
-        return res.status(400).json({ message: 'Please provide name, latitude, and longitude' });
+export const getAllLocations = async (req, res) => {
+    try {
+      const locations = await Location.findAll({
+        include: [{ model: Category }, { model: User }]
+      });
+      res.status(200).json(locations);
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong, could not find a place.',
+            500
+          );
+          return next(error);
     }
-    const query = 'INSERT INTO locations (name, latitude, longitude) VALUES (?, ?, ?)';
-    db.query(query, [name, latitude, longitude], (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.json({ message: 'Location added successfully', locationId: results.insertId });
-    });
-};
+  }
 
-module.exports = { getAllLocations, addLocation };
+  
