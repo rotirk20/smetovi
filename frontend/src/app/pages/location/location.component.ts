@@ -1,10 +1,12 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocationCardComponent } from 'src/app/components/location-card/location-card.component';
-import { Location } from 'src/app/components/location-card/location-card.component';
+import { Location } from 'src/app/shared/models/location.model';
 import { GoogleMapsModule, MapMarker, MapInfoWindow } from '@angular/google-maps';
+import { InfoWindowContent } from 'src/app/shared/models/info-window.model';
+import { Marker } from 'src/app/shared/models/marker.model';
 
-const DUMMY_LOCATIONS = [
+const DUMMY_LOCATIONS: Location[] = [
   {
     id: 1,
     name: 'Konjički klub "Smet"',
@@ -22,20 +24,6 @@ const DUMMY_LOCATIONS = [
     coordinates: { lat: 44.242418, lng: 17.97361 },
   },
 ];
-
-interface Marker {
-  position: google.maps.LatLngLiteral;
-  title: string;
-}
-
-interface InfoWindowContent {
-  name: string;
-  image?: string;
-}
-
-interface Marker extends google.maps.MarkerOptions {
-  image?: string;  // Add custom field for image URL
-}
 
 @Component({
   selector: 'app-location',
