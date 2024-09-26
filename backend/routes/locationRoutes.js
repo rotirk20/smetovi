@@ -1,11 +1,12 @@
-const express = require('express');
-const { getAllLocations, addLocation } = require('../controllers/locationsController');
+import express from 'express';
+import { getAllLocations, addLocation } from '../controllers/locationsController.js';
+
 const router = express.Router();
 
 // Route to get all locations
 router.get('/', getAllLocations);
 
 // Route to add a new location
-// router.post('/', addLocation);
+router.post('/', addLocation);
 
-module.exports = router;
+export default router;
