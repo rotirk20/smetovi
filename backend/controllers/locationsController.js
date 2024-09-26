@@ -18,4 +18,27 @@ export const getAllLocations = async (req, res) => {
     }
   }
 
+// Add a new location
+export const addLocation = async (req, res, next) => {
+    const { name, description, address, longitude, latitude, CategoryId } = req.body;
+  
+    try {
+      const location = await Location.create({
+        name,
+        description,
+        address,
+        longitude, 
+        latitude,
+        CategoryId
+      });
+      res.status(201).json(location);
+    } catch (err) {
+      const error = new HttpError(
+        'Creating location failed, please try again.',
+        500
+      );
+      return next(error);
+    }
+}
+
   

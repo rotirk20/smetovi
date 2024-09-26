@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllLocations } from '../controllers/locationsController.js';
+import { getAllLocations, addLocation } from '../controllers/locationsController.js';
 
 const router = express.Router();
 
@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/', getAllLocations);
 
 // Route to add a new location
-// router.post('/', addLocation);
+router.post('/', addLocation);
 
 export default router;
