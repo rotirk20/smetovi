@@ -1,21 +1,37 @@
-<nav class="bg-white shadow-lg">
+<nav [class.fixed]="isHomePage" [class.relative]="!isHomePage"
+    class="bg-white fixed top-0 left-0 w-full z-10 transition duration-300 ease-in-out border-b-1">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-16 bg-transparent">
             <!-- Website Name on the Left -->
             <div class="flex items-center">
-                <a href="/" class="text-xl font-semibold text-gray-900 font-mountain">SMETOVI</a>
+                <a href="/" class="text-xl font-semibold"
+                    [class.text-black]="!isHomePage || hasScrolled || isMobileMenuOpen"
+                    [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">SMETOVI</a>
             </div>
 
             <!-- Navigation Menu on the Right -->
             <div class="hidden sm:flex space-x-8 items-center">
-                <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}" class="text-md font-medium hover:text-gray-700 font-mountain">Početna</a>
-                <a routerLink="/lokacije" routerLinkActive="text-blue-500" class="text-md font-medium hover:text-gray-700 font-mountain">Lokacije</a>
-                <a routerLink="/kontakt" routerLinkActive="text-blue-500" class="text-md font-medium hover:text-gray-700 font-mountain">Kontakt</a>
+                <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}"
+                    class="text-md font-medium hover:text-blue-500 font-mountain"
+                    [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/') }">
+                    Početna
+                </a>
+                <a routerLink="/lokacije" routerLinkActive="text-blue-500"
+                    class="text-md font-medium hover:text-blue-500 font-mountain"
+                    [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/lokacije') }">
+                    Lokacije
+                </a>
+                <a routerLink="/kontakt" routerLinkActive="text-blue-500"
+                    class="text-md font-medium hover:text-blue-500 font-mountain"
+                    [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/kontakt') }">
+                    Kontakt
+                </a>
             </div>
 
             <!-- Mobile Menu Button -->
             <div class="sm:hidden flex items-center">
-                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                <button id="mobile-menu-button" class="text-black focus:outline-none"
+                    [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,8 +44,11 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="sm:hidden hidden">
-        <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}" class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain">Početna</a>
-        <a routerLink="/lokacije" routerLinkActive="text-blue-500" class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain">Lokacije</a>
-        <a routerLink="/kontakt" routerLinkActive="text-blue-500" class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain">Kontakt</a>
+        <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}"
+            class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain text-black">Početna</a>
+        <a routerLink="/lokacije" routerLinkActive="text-blue-500"
+            class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain text-black">Lokacije</a>
+        <a routerLink="/kontakt" routerLinkActive="text-blue-500"
+            class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain text-black">Kontakt</a>
     </div>
 </nav>
