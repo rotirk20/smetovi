@@ -1,19 +1,18 @@
-import { Location, User } from '../models/index.js';
+import { Location, User, Category } from '../models/index.js';
 import HttpError from '../models/HttpError.js';
 
 
 // Get all locations
-export const getAllLocations = async (req, res) => {
+export const getAllLocations = async (req, res, next) => {
     try {
-      const locations = await Location.findAll({
-        include: [{ model: Category }, { model: User }]
-      });
+      const locations = await Location.findAll();
       res.status(200).json(locations);
     } catch (err) {
         const error = new HttpError(
             'Something went wrong, could not find a place.',
             500
           );
+          console.error(err)
           return next(error);
     }
   }
