@@ -1,14 +1,14 @@
-<div class="w-full max-w-5xl mx-auto rounded-xl p-4 sm:flex sm:items-center sm:space-x-6 shadow-md hover:shadow-sm transition-shadow duration-300 mb-4 cursor-pointer" (click)="onSelectLocation()" [ngClass]="{'shadow-none bg-blue-500 text-white' : isSelected, 'bg-white': !isSelected}">
+<div class="w-full max-w-5xl mx-auto rounded-xl p-4 sm:flex sm:items-center sm:space-x-6 shadow-md hover:shadow-sm transition-shadow duration-300 mb-4 bg-white cursor-pointer" (click)="onSelectLocation()" [ngClass]="{'shadow-none border-l-8 border-blue-500 text-white' : isSelected}">
   <img class="block mx-auto h-16 w-16 object-cover rounded-full sm:mx-0 sm:flex-shrink-0" [src]="location.image" alt="">
   <div class="text-center space-y-2 sm:text-left">
     <div class="space-y-0.5">
-      <p class="text-lg text-black font-semibold" [ngClass]="{'text-white' : isSelected, 'text-black': !isSelected}">
+      <p class="text-lg text-black font-semibold">
         {{ location.name }}
       </p>
-      <p class="text-gray-500 text-sm text-slate-500 truncate" [ngClass]="{'text-white' : isSelected, 'text-gray-500': !isSelected}">
+      <p class="text-gray-500 text-sm text-slate-500 truncate">
         {{ location.address }}
       </p>
-      <p class="text-gray-600 text-sm text-slate-500 truncate" [ngClass]="{'text-white' : isSelected, 'text-gray-600': !isSelected}">
+      <p class="text-gray-600 text-sm text-slate-500 truncate">
         Kategorija: {{ location.type }}
       </p>
     </div>

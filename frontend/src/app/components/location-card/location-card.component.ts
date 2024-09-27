@@ -1,14 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-export interface Location {
-  id: number;
-  name: string;
-  address: string;
-  type: string;
-  image?: string;
-  coordinates: google.maps.LatLngLiteral
-}
+import { Location } from 'src/app/shared/models/location.model';
 
 @Component({
   selector: 'app-location-card',
