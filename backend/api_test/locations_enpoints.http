@@ -3,17 +3,17 @@
 @baseUrl = http://localhost:4000
 
 ### Create a new location
-POST {{baseUrl}}/api/locations
-Content-Type: application/json
+# POST {{baseUrl}}/api/locations
+# Content-Type: application/json
 
-{
-  "name": "Wall Street",
-  "address": "New York, NY 10022",
-  "description": "Famous urban park in Manhattan",
-  "longitude": -73.9665,
-  "latitude": 40.7812,
-  "CategoryId": 1
-}
+# {
+#   "name": "Wall Street",
+#   "address": "New York, NY 10022",
+#   "description": "Famous urban park in Manhattan",
+#   "longitude": -73.9665,
+#   "latitude": 40.7812,
+#   "CategoryId": 1
+# }
 
 ### Get all locations
 GET {{baseUrl}}/locations
