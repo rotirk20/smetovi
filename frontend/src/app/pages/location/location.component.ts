@@ -5,25 +5,8 @@ import { Location } from 'src/app/shared/models/location.model';
 import { GoogleMapsModule, MapMarker, MapInfoWindow } from '@angular/google-maps';
 import { InfoWindowContent } from 'src/app/shared/models/info-window.model';
 import { Marker } from 'src/app/shared/models/marker.model';
+import { LocationService } from 'src/app/shared/services/location.service';
 
-const DUMMY_LOCATIONS: Location[] = [
-  {
-    id: 1,
-    name: 'Konjički klub "Smet"',
-    address: 'Smetovi bb',
-    type: 'Zooloski vrt',
-    image: '/assets/images/smet.jpg',
-    coordinates: { lat: 44.241592, lng: 17.969323 },
-  },
-  {
-    id: 2,
-    name: 'Restoran "960"',
-    address: 'Smetovi bb',
-    type: 'Restoran',
-    image: '/assets/images/restoran_960.jpg',
-    coordinates: { lat: 44.242418, lng: 17.97361 },
-  },
-];
 
 @Component({
   selector: 'app-location',
@@ -67,14 +50,22 @@ export class LocationComponent implements OnInit {
       },
     ],
   };
-  locations: Location[] = DUMMY_LOCATIONS;
+  locations: Location[] = [];
   selectedLocationIndex!: number; // Tracks the selected location index
   infoWindowContent: InfoWindowContent = {
     name: '',
     image: ''
   };
+  constructor(private locationService: LocationService) {}
 
   ngOnInit() {
+    this.locationService.getLocations().subscribe(data => {
+      this.locations = data.locations; // Assuming 'locations' is the key in your JSON
+      this.loadMarkers();
+    })    
+  }
+
+  loadMarkers() {
     this.locations.forEach(location => {
       this.markers.push(
         {
@@ -96,7 +87,7 @@ export class LocationComponent implements OnInit {
    // Handle card click and open corresponding marker infoWindow
    openInfoWindowFromCard(index: number) {
     const markerRef = this.markerElements.get(index); // Get the marker reference by index
-    if (markerRef) {
+    if (markerRef && this.markers[index].position) {
       this.center = this.markers[index].position; // Center map on the marker's position
       this.selectedLocationIndex = index; // Set the selected location index
       this.openInfoWindow(this.markers[index], markerRef, index);
