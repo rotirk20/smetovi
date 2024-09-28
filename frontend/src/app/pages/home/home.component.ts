@@ -1,7 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ItemListComponent } from 'src/app/components/location-list/item-list.component';
+import { ItemListComponent } from 'src/app/components/item-list/item-list.component';
+import { WeatherComponent } from 'src/app/components/weather/weather.component';
 import { Location } from 'src/app/shared/models/location.model';
 import { LocationService } from 'src/app/shared/services/location.service';
 
@@ -10,7 +11,7 @@ import { LocationService } from 'src/app/shared/services/location.service';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [RouterLink, HttpClientModule, ItemListComponent]
+  imports: [RouterLink, HttpClientModule, ItemListComponent, WeatherComponent]
 })
 export class HomeComponent implements OnInit {
   locations: Location[] = [];
