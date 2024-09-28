@@ -1,0 +1,25 @@
+{
+    "locations": [
+      {
+        "name": "Konjički klub 'Smet'",
+        "description": "Horse riding club",
+        "image": "/assets/images/smet.jpg"
+      },
+      {
+        "name": "Spomen obilježje",
+        "description": "Memorial monument",
+        "image": "/assets/images/spomenik.jpg"
+      },
+      {
+        "name": "Restoran 360",
+        "description": "Restaurant 360",
+        "image": "/assets/images/restoran_960.jpg"
+      },
+      {
+        "name": "Dom Saveza Izviđača i Radioamatera",
+        "description": "Dom Saveza Izviđača i Radioamatera",
+        "image": "/assets/images/dom_saveza_izvidaca_i_radioamatera.jpg"
+      }
+    ]
+  }
+  
