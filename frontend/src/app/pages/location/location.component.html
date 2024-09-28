@@ -6,11 +6,12 @@
           [location]="locationItem"
           [index]="i"
           [isSelected]="isLocationSelected(i)" 
-          (locationSelected)="openInfoWindowFromCard(i)">
+          (locationSelected)="openInfoWindowFromCard(i)"
+          (click)="scrollToMap()">
         </app-location-card>
       </ng-container>
     </div>
-    <div class="w-full py-6">
+    <div class="w-full py-6" #googleMapContainer>
       <google-map height="100vh" width="100%" [zoom]="zoom" [center]="center" [options]="options">
         <map-marker 
           *ngFor="let marker of markers; let i = index" 

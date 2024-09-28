@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocationCardComponent } from 'src/app/components/location-card/location-card.component';
 import { Location } from 'src/app/shared/models/location.model';
@@ -35,7 +35,8 @@ const DUMMY_LOCATIONS: Location[] = [
 export class LocationComponent implements OnInit {
   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow | undefined;
   @ViewChildren('markerRef') markerElements!: QueryList<MapMarker>;
-  
+  @ViewChild('googleMapContainer') googleMapContainer!: ElementRef;
+
   center: google.maps.LatLngLiteral = {
     lat: 44.241962,
     lng: 17.969424,
@@ -83,6 +84,13 @@ export class LocationComponent implements OnInit {
         },
       )
     });
+  }
+
+  scrollToMap() {
+    // Scroll to the Google Maps component
+    if (window.innerWidth <= 768) {
+      this.googleMapContainer.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
    // Handle card click and open corresponding marker infoWindow
