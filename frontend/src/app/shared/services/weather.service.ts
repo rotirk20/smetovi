@@ -11,7 +11,7 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  getWeather(city: string): Observable<any> {
+  getWeather(): Observable<any> {
     const url = `${this.apiUrl}?lat=44.20&lon=17.90&appid=${this.apiKey}&units=metric`; // Use 'imperial' for Fahrenheit
     return this.http.get(url);
   }

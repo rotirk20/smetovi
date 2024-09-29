@@ -1,36 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [],
+  imports: [NgIf, NgClass],
   templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss']
+  styleUrls: ['./weather.component.scss'],
 })
 export class WeatherComponent implements OnInit {
   weatherData: any;
-  city: string = 'Zenica'; // Default city, you can make this dynamic
+  weatherIcon: string = ''; // This will hold the FontAwesome icon name
+  @Input() hasScrolled: boolean = false; // Track if the navbar has scrolled
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
-    this.getWeather(this.city);
+    this.getWeather();
   }
 
-  getWeather(city: string) {
-    this.weatherService.getWeather(city).subscribe({
+  getWeather() {
+    this.weatherService.getWeather().subscribe({
       next: (data) => {
-        this.weatherData = data;
-        console.log(this.weatherData)
+        // Assuming temperature is in data.main.temp and is in Celsius
+        const rawTemperature = data.main.temp;
+        const weatherCondition = data.weather[0].main; // e.g., 'Clear', 'Rain', 'Clouds'
+
+        this.weatherData = {
+          ...data,
+          roundedTemp: Math.round(rawTemperature), // Rounds to the nearest integer
+          condition: weatherCondition, // Save the condition
+        };
+        this.setWeatherIcon(data.weather[0].main);
       },
-      error: (error) => {
-        console.error('Error fetching weather data:', error);
-      },
-      complete: () => {
-        console.log('Weather data fetching complete');
-      }
+      error: (err) => console.error(err),
     });
   }
-  
+
+  setWeatherIcon(condition: string) {
+    // Set the icon path based on the weather condition
+    const basePath = 'assets/images/weather/'; // Path to your PNG icons
+    switch (condition) {
+      case 'Clear':
+        this.weatherIcon = `${basePath}sun.png`;
+        break;
+      case 'Clouds':
+        this.weatherIcon = `${basePath}cloud.png`;
+        break;
+      case 'Rain':
+        this.weatherIcon = `${basePath}cloud_rain.png`;
+        break;
+      case 'Snow':
+        this.weatherIcon = `${basePath}snow.png`;
+        break;
+      default:
+        this.weatherIcon = `${basePath}default.png`; // Default icon for unknown conditions
+    }
+    console.log(this.weatherIcon);
+  }
 }
