@@ -42,6 +42,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
       if (event instanceof NavigationEnd) {
         this.isHomePage = this.router.url === '/';
         this.setHeaderBackground(); // Set background on route change
+        window.scrollTo(0, 0); // Scroll to top on route change
       }
     });
 
