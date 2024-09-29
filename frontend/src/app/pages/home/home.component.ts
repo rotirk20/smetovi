@@ -11,7 +11,7 @@ import { LocationService } from 'src/app/shared/services/location.service';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [RouterLink, HttpClientModule, ItemListComponent, WeatherComponent]
+  imports: [RouterLink, HttpClientModule, ItemListComponent]
 })
 export class HomeComponent implements OnInit {
   locations: Location[] = [];

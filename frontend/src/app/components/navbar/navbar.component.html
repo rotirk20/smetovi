@@ -26,10 +26,11 @@
                     [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/kontakt') }">
                     Kontakt
                 </a>
+                <app-weather [hasScrolled]="hasScrolled || !isHomePage"></app-weather>
             </div>
-
             <!-- Mobile Menu Button -->
             <div class="sm:hidden flex items-center">
+                <app-weather [hasScrolled]="hasScrolled || isMobileMenuOpen"></app-weather>
                 <button id="mobile-menu-button" class="text-black focus:outline-none"
                     [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
