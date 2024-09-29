@@ -11,17 +11,20 @@ Make sure you have the following installed:
 - Node.js
 - Angular
 - npm
-Installation
+  Installation
 
 Set up the Frontend:
+
 ```
 cd frontend
 npm i
-npm run dev
+npm run start
 ```
+
 Set up the Backend:
 
 **Create .env in backend folder in this format with already configurated database in MySQL:**
+
 ```
 DB_HOST=localhost
 DB_USER=root
@@ -30,12 +33,15 @@ DB_NAME=smetovi
 DB_PORT=4000
 NODE_ENV=development
 ```
+
 then
+
 ```
 cd backend
 npm i
 npm run start
 ```
+
 Running the Application
 After setting up the frontend and backend, you can access the application at:
 
