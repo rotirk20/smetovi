@@ -6,13 +6,14 @@ import {
   RouterLink,
   RouterLinkActive,
 } from '@angular/router';
+import { WeatherComponent } from '../weather/weather.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterLink, RouterLinkActive, NgClass, WeatherComponent],
 })
 export class NavbarComponent implements AfterViewInit, OnInit {
   isHomePage: boolean = false;
@@ -41,6 +42,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
       if (event instanceof NavigationEnd) {
         this.isHomePage = this.router.url === '/';
         this.setHeaderBackground(); // Set background on route change
+        window.scrollTo(0, 0); // Scroll to top on route change
       }
     });
 

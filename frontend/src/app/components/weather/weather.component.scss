@@ -1,0 +1,21 @@
+.weather-widget {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 5px;
+}
+
+.weather-icon {
+    width: 48px; /* Adjust as needed */
+    height: 48px;
+}
+
+.temperature {
+    font-size: 20px; /* Adjust font size as needed */
+    position: relative;
+    top: 3px;
+}
+
+.mr-2 {
+    margin-right: 8px; /* Space between icon and temperature */
+}

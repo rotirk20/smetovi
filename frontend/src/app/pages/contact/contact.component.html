@@ -1,12 +1,28 @@
-<main class="flex h-screen items-center justify-center bg-gray-100">
-    <div class="bg-white shadow-lg rounded-lg p-4 flex items-center space-x-4">
-        <!-- Mail Icon -->
-        <svg viewBox="0 0 8 6" class="h-6 w-6 text-blue-500"xmlns="http://www.w3.org/2000/svg">
-            <path d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
-        </svg>
-        
-        
-        <!-- Email Address -->
-        <a href="mailto:info@smetovi.ba" class="text-gray-700 hover:text-blue-500">info@smetovi.ba</a>
+<main class="flex flex-col lg:flex-row h-screen items-center justify-center">
+    <!-- Left Image Section -->
+    <div class="w-full lg:w-1/2 h-64 lg:h-full">
+        <img src="assets/images/kontakt.jpg" alt="Description" class="object-cover w-full h-full">
+    </div>
+
+    <!-- Right Text Section -->
+    <div class="w-full lg:w-1/2 h-full flex items-center justify-center p-6">
+        <div class="p-4 lg:p-8">
+            <h1 class="text-3xl lg:text-4xl font-bold mb-4">Kontakt</h1>
+            <p class="text-md text-gray-600">
+                Za sve informacije, događaje, lokacije kao i probleme na samoj webstranici budite slobodni da nas
+                kontaktirate na ispod prikazani email. <br>
+                Potruditi ćemo se da odgovorimo u što kraćem roku.
+            </p>
+            <br>
+            <div class="flex">
+                <a href="mailto:info@smetovi.ba"
+                    class="flex items-center bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 max-w-xs">
+                    <svg viewBox="0 0 8 6" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <path d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z" />
+                    </svg>
+                    <span class="pl-3">info@smetovi.ba</span>
+                </a>
+            </div>
+        </div>
     </div>
 </main>

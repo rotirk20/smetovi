@@ -1,0 +1,29 @@
+{
+    "locations": [
+      {
+        "name": "Konjički klub 'Smet'",
+        "description": "Horse riding club",
+        "image": "/assets/images/smet.jpg",
+        "coordinates": { "lat": 44.241592, "lng": 17.969323 }
+      },
+      {
+        "name": "Spomen obilježje",
+        "description": "Memorial monument",
+        "image": "/assets/images/spomenik.jpg",
+        "coordinates": { "lat": 44.244918, "lng": 17.959509 }
+      },
+      {
+        "name": "Restoran 960",
+        "description": "Restaurant 960",
+        "image": "/assets/images/restoran_960.jpg",
+        "coordinates": { "lat": 44.242418, "lng": 17.97361 }
+      },
+      {
+        "name": "Dom Saveza Izviđača i Radioamatera",
+        "description": "Dom Saveza Izviđača i Radioamatera",
+        "image": "/assets/images/dom_saveza_izvidaca_i_radioamatera.jpg",
+        "coordinates": { "lat": 44.245125, "lng": 17.978405 }
+      }
+    ]
+  }
+  
