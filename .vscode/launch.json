@@ -8,6 +8,13 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
+            "env": {
+                "DB_HOST": "localhost",
+                "DB_USER": "root",
+                "DB_PASSWORD": "",
+                "DB_NAME": "smetovi",
+                "PORT": "4001"
+            },
             "skipFiles": [
                 "<node_internals>/**"
             ],

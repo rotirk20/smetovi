@@ -1,28 +1,49 @@
-const db = require('../config/db');
+const LocationService = require("../services/locationService");
 
-// Get all locations
-const getAllLocations = (req, res) => {
-    db.query('SELECT * FROM locations', (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.json(results);
-    });
+exports.createLocation = async (req, res, next) => {
+  try {
+    const location = await LocationService.createLocation(req.body);
+    res.status(201).json({ message: "Location created", location });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
-// Add a new location
-const addLocation = (req, res) => {
-    const { name, latitude, longitude } = req.body;
-    if (!name || !latitude || !longitude) {
-        return res.status(400).json({ message: 'Please provide name, latitude, and longitude' });
-    }
-    const query = 'INSERT INTO locations (name, latitude, longitude) VALUES (?, ?, ?)';
-    db.query(query, [name, latitude, longitude], (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.json({ message: 'Location added successfully', locationId: results.insertId });
-    });
+exports.updateLocation = async (req, res, next) => {
+  try {
+    const location = await LocationService.updateLocation(
+      req.params.id,
+      req.body
+    );
+    res.status(200).json({ message: "Location updated", location });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
-module.exports = { getAllLocations, addLocation };
+exports.getAllLocations = async (req, res, next) => {
+  try {
+    const [rows] = await LocationService.getAllLocations();
+    res.status(200).json(rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getLocationById = async (req, res, next) => {
+  try {
+    const [rows] = await LocationService.getLocationById(req.params.id);
+    res.status(200).json(rows[0]);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteLocation = async (req, res, next) => {
+  try {
+    await LocationService.deleteLocation(req.params.id);
+    res.status(200).json({ message: "Location deleted" });
+  } catch (error) {
+    next(error);
+  }
+};

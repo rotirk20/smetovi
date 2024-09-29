@@ -1,25 +1,12 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-
-const User = sequelize.define('User', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true
-    }
+class User {
+  constructor(id, name, email, password, createdAt, updatedAt) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
-});
+}
 
-export default User;
+module.exports = User;

@@ -1,31 +1,27 @@
-// File: models/Location.js
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+class Location {
+  constructor(
+    id,
+    name,
+    address,
+    description,
+    longitude,
+    latitude,
+    userId,
+    categoryId,
+    createdAt,
+    updatedAt
+  ) {
+    this.id = id;
+    this.name = name;
+    this.address = address;
+    this.description = description;
+    this.longitude = longitude;
+    this.latitude = latitude;
+    this.userId = userId;
+    this.categoryId = categoryId;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+}
 
-const Location = sequelize.define('Location', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  address: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  description: {
-    type: DataTypes.TEXT
-  },
-  longitude: {
-    type: DataTypes.FLOAT
-  },
-  latitude: {
-    type: DataTypes.FLOAT
-  },
-  
-});
-
-export default Location;
+module.exports = Location;
