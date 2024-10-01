@@ -17,7 +17,7 @@ Set up the Frontend:
 ```
 cd frontend
 npm i
-npm run dev
+npm run start
 ```
 Set up the Backend:
 
