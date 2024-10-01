@@ -71,6 +71,17 @@ const createTables = () => {
     );
   `;
 
+  const contactTable = `
+    CREATE TABLE IF NOT EXISTS contacts (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(63) NOT NULL,
+      contactInfo VARCHAR(63), -- Email is optional
+      subject VARCHAR(127) NOT NULL,
+      message VARCHAR(255) NOT NULL, -- Message length is now 255 characters
+      createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+
   connection.query(userTable, (err) => {
     if (err) throw err;
     console.log("User table checked/created");
@@ -85,6 +96,12 @@ const createTables = () => {
     if (err) throw err;
     console.log("Location table checked/created");
   });
+
+  // Create contact table if needed
+  // connection.query(contactTable, (err) => {
+  //   if (err) throw err;
+  //   console.log("Contact table checked/created");
+  // });
 };
 
 module.exports = initDB;

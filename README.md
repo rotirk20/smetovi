@@ -32,7 +32,20 @@ DB_PASSWORD=
 DB_NAME=smetovi
 DB_PORT=4000
 NODE_ENV=development
+
+SMTP_HOST=your-smtp-host                # e.g., smtp.gmail.com
+SMTP_PORT=your-smtp-port                # e.g., 587 for TLS or 465 for SSL
+SMTP_USER=your-email@gmail.com           # Your email address
+SMTP_PASS=your-app-password              # Your app password for the email account
+SENDER_EMAIL=your-sender-email           # Email address from which the emails will be sent
+DEFAULT_RECEIVER_EMAIL=recipient@example.com # Default recipient email address
+DEFAULT_RECEIVER_NAME=your-reveiver-name     # Name of the default recipient
 ```
+
+Make sure to replace the placeholders with your actual values.
+
+**Note**
+If you are using Gmail, you need to enable "Less secure app access" or use an App Password to authenticate.
 
 then
 
