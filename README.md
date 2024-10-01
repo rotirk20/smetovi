@@ -8,8 +8,8 @@ Follow these instructions to set up and run the project on your local machine.
 Prerequisites
 Make sure you have the following installed:
 
-- Node.js
-- Angular
+- Node.js / Express
+- Angular and CSS Framework Tailwind
 - npm
   Installation
 
