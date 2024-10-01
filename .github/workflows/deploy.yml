@@ -112,7 +112,7 @@ jobs:
       # Copy Backend Files to VM using scp
       - name: Copy Backend to VM
         run: |
-          scp -r ./backend/* ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:~/smetovi/backend
+          scp -o StrictHostKeyChecking=no -r ./backend/* ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:~/smetovi/backend
 
       # Restart Node.js Backend on VM
       - name: Restart Backend on VM
