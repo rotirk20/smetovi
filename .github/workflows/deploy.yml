@@ -87,7 +87,7 @@ jobs:
           log-level: verbose
           force: true # This will re-upload all files, even unchanged ones
 
-  # --- Deploy Backend ---
+  # --- Deploy Backend to VM ---
   deploy-backend:
     runs-on: ubuntu-latest
     needs: build-backend
@@ -103,14 +103,22 @@ jobs:
           name: backend-artifact
           path: ./backend/
 
-      - name: Deploy backend to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      # Adding SSH Key for the VM
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./backend/
-          server-dir: /api/
-          port: ${{ secrets.FTP_PORT }}
-          log-level: verbose
-          force: true
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Copy Backend Files to VM using scp
+      - name: Copy Backend to VM
+        run: |
+          scp -r ./backend/* ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:~/smetovi/backend
+
+      # Restart Node.js Backend on VM
+      - name: Restart Backend on VM
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} << 'EOF'
+            cd ~/smetovi/backend
+            npm install
+            pm2 restart Smetovi
+          EOF
