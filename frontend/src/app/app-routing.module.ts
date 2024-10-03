@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { LocationComponent } from './pages/location/location.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { HomeComponent } from './home/pages/home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'lokacije', component: LocationComponent },
-  { path: 'kontakt', component: ContactComponent },
+  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'dashboard', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: '**', redirectTo: '' } // Optional: handle unknown routes
 ];
 
