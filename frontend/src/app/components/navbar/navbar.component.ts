@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, AfterViewInit, OnInit, HostListener } from '@angular/core';
 import {
   NavigationEnd,
@@ -13,14 +13,22 @@ import { WeatherComponent } from '../weather/weather.component';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass, WeatherComponent],
+  imports: [RouterLink, RouterLinkActive, NgClass, WeatherComponent, NgIf],
 })
 export class NavbarComponent implements AfterViewInit, OnInit {
   isHomePage: boolean = false;
   hasScrolled: boolean = false;
   isMobileMenuOpen: boolean = false; // Track if mobile menu is open
+  showNavbar = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: any) => {
+      if (event.url) {
+        // Hide navbar for admin routes (adjust the path as necessary)
+        this.showNavbar = !event.url.startsWith('/dashboard');
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     const mobileMenuButton = document.getElementById('mobile-menu-button');

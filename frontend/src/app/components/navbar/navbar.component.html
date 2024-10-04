@@ -1,5 +1,5 @@
-<nav [class.fixed]="isHomePage" [class.relative]="!isHomePage"
-    class="bg-white fixed top-0 left-0 w-full z-10 transition duration-300 ease-in-out border-b-1">
+<nav [class.fixed]="isHomePage" *ngIf="showNavbar" [class.relative]="!isHomePage" [class.shadow-sm]="!isHomePage"
+    class="fixed top-0 left-0 w-full z-10 transition duration-300 ease-in-out border-b-1">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 bg-transparent">
             <!-- Website Name on the Left -->
