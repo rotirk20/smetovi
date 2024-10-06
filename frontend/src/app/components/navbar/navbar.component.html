@@ -9,7 +9,7 @@
                     [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">SMETOVI</a>
             </div>
 
-            <!-- Navigation Menu on the Right -->
+            <!-- Navigation Menu on the Right (Desktop) -->
             <div class="hidden sm:flex space-x-8 items-center">
                 <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}"
                     class="text-md font-medium hover:text-blue-500 font-mountain"
@@ -26,11 +26,14 @@
                     [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/kontakt') }">
                     Kontakt
                 </a>
-                <app-weather [hasScrolled]="hasScrolled || !isHomePage"></app-weather>
+                <!-- Weather Component (Visible on Desktop) -->
+                <app-weather-widget *ngIf="!isMobileView" [hasScrolled]="hasScrolled || !isHomePage"></app-weather-widget>
             </div>
-            <!-- Mobile Menu Button -->
+
+            <!-- Mobile Menu Button (Visible on Mobile) -->
             <div class="sm:hidden flex items-center">
-                <app-weather [hasScrolled]="hasScrolled || !isHomePage || isMobileMenuOpen"></app-weather>
+                <!-- Weather Component (Visible on Mobile) -->
+                <app-weather-widget *ngIf="isMobileView" [hasScrolled]="hasScrolled || !isHomePage || isMobileMenuOpen"></app-weather-widget>
                 <button id="mobile-menu-button" class="text-black focus:outline-none"
                     [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

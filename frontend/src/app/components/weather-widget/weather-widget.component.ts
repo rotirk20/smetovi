@@ -3,39 +3,33 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 
 @Component({
-  selector: 'app-weather',
+  selector: 'app-weather-widget',
   standalone: true,
   imports: [NgIf, NgClass],
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss'],
+  templateUrl: './weather-widget.component.html',
+  styleUrls: ['./weather-widget.component.scss'],
 })
-export class WeatherComponent implements OnInit {
+export class WeatherWidget implements OnInit {
   weatherData: any;
   weatherIcon: string = ''; // This will hold the FontAwesome icon name
   @Input() hasScrolled: boolean = false; // Track if the navbar has scrolled
 
   constructor(private weatherService: WeatherService) {}
 
-  ngOnInit() {
-    this.getWeather();
+  ngOnInit(): void {
+    // Start weather updates with a default interval of 15 minutes (can change dynamically)
+    this.weatherService.startWeatherUpdates(1 * 60 * 1000);
+
+    // Subscribe to the weather data observable
+    this.weatherService.weather$.subscribe(data => {
+      this.weatherData = data;
+      this.setWeatherIcon(data?.weather[0].main);
+    });
   }
 
-  getWeather() {
-    this.weatherService.getWeather().subscribe({
-      next: (data) => {
-        // Assuming temperature is in data.main.temp and is in Celsius
-        const rawTemperature = data.main.temp;
-        const weatherCondition = data.weather[0].main; // e.g., 'Clear', 'Rain', 'Clouds'
-
-        this.weatherData = {
-          ...data,
-          roundedTemp: Math.round(rawTemperature), // Rounds to the nearest integer
-          condition: weatherCondition, // Save the condition
-        };
-        this.setWeatherIcon(data.weather[0].main);
-      },
-      error: (err) => console.error(err),
-    });
+  ngOnDestroy(): void {
+    // Stop the weather updates when the component is destroyed
+    this.weatherService.stopWeatherUpdates();
   }
 
   setWeatherIcon(condition: string) {

@@ -6,20 +6,22 @@ import {
   RouterLink,
   RouterLinkActive,
 } from '@angular/router';
-import { WeatherComponent } from '../weather/weather.component';
+import { WeatherWidget } from '../weather-widget/weather-widget.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass, WeatherComponent, NgIf],
+  imports: [RouterLink, RouterLinkActive, NgClass, WeatherWidget, NgIf],
 })
 export class NavbarComponent implements AfterViewInit, OnInit {
   isHomePage: boolean = false;
   hasScrolled: boolean = false;
   isMobileMenuOpen: boolean = false; // Track if mobile menu is open
-  showNavbar = true;
+  showNavbar: boolean = true;
+  isMobileView: boolean = false;
+  intervalTime: number = 900000; // Default 15 minutes (in milliseconds)
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: any) => {
@@ -44,6 +46,10 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     }
   }
 
+  checkScreenSize() {
+    this.isMobileView = window.innerWidth <= 640; // Tailwind's sm breakpoint
+  }
+
   ngOnInit(): void {
     // Listen for route changes to determine if we're on the homepage
     this.router.events.subscribe((event) => {
@@ -56,6 +62,16 @@ export class NavbarComponent implements AfterViewInit, OnInit {
 
     // Check the scroll position on page load
     this.checkScroll();
+
+    // Check the screen size initially
+    this.checkScreenSize();
+
+    // Listen for window resize events
+    window.addEventListener('resize', () => {
+      this.checkScreenSize();
+    });
+
+    this.setWeatherUpdateInterval(30); // Set interval to 30 minutes, example use case
   }
 
   // Listen to scroll events
@@ -66,6 +82,10 @@ export class NavbarComponent implements AfterViewInit, OnInit {
 
   isActive(route: string): boolean {
     return this.router.isActive(route, true);
+  }
+
+  setWeatherUpdateInterval(minutes: number): void {
+    this.intervalTime = minutes * 60 * 1000; // Convert minutes to milliseconds
   }
 
   // Set the scroll flag when scrolled past 50px
