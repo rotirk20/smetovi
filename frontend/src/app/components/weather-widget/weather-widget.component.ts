@@ -18,7 +18,7 @@ export class WeatherWidget implements OnInit {
 
   ngOnInit(): void {
     // Start weather updates with a default interval of 15 minutes (can change dynamically)
-    this.weatherService.startWeatherUpdates(1 * 60 * 1000);
+    this.weatherService.startWeatherUpdates(15 * 60 * 1000);
 
     // Subscribe to the weather data observable
     this.weatherService.weather$.subscribe(data => {
