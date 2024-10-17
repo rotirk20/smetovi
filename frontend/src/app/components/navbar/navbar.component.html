@@ -11,29 +11,50 @@
 
             <!-- Navigation Menu on the Right (Desktop) -->
             <div class="hidden sm:flex space-x-8 items-center">
-                <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}"
+                <a routerLink="/" routerLinkActive="text-blue-500 active-route" [routerLinkActiveOptions]="{exact: true}"
                     class="text-md font-medium hover:text-blue-500 font-mountain"
                     [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/') }">
                     Početna
                 </a>
-                <a routerLink="/lokacije" routerLinkActive="text-blue-500"
+                <a routerLink="/lokacije" routerLinkActive="text-blue-500 active-route"
                     class="text-md font-medium hover:text-blue-500 font-mountain"
                     [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/lokacije') }">
                     Lokacije
                 </a>
-                <a routerLink="/kontakt" routerLinkActive="text-blue-500"
+                <a routerLink="/kontakt" routerLinkActive="text-blue-500 active-route"
                     class="text-md font-medium hover:text-blue-500 font-mountain"
                     [ngClass]="{'text-white': isHomePage && !hasScrolled && !isMobileMenuOpen && !isActive('/kontakt') }">
                     Kontakt
                 </a>
                 <!-- Weather Component (Visible on Desktop) -->
-                <app-weather-widget *ngIf="!isMobileView" [hasScrolled]="hasScrolled || !isHomePage"></app-weather-widget>
+                <app-weather-widget *ngIf="!isMobileView"
+                    [hasScrolled]="hasScrolled || !isHomePage"></app-weather-widget>
+                <div class="relative" (click)="toggleMenu()" *ngIf="isLoggedIn">
+                    <img src="../../../assets/images/smetovi-trees.jpg" alt="User Avatar" class="w-10 h-10 rounded-full cursor-pointer" />
+
+                    <div *ngIf="subMenuOpen"
+                        class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-md border z-10">
+                        <ul class="py-2">
+                            <li>
+                                <a routerLink="/dashboard" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-100">Admin</a>
+                            </li>
+                            <li>
+                                <a routerLink="/dashboard/postavke" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-100">Postavke</a>
+                            </li>
+                            <li>
+                                <a (click)="logout()" (click)="toggleMenu()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100">Odjava</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Mobile Menu Button (Visible on Mobile) -->
             <div class="sm:hidden flex items-center">
                 <!-- Weather Component (Visible on Mobile) -->
-                <app-weather-widget *ngIf="isMobileView" [hasScrolled]="hasScrolled || !isHomePage || isMobileMenuOpen"></app-weather-widget>
+                <app-weather-widget *ngIf="isMobileView"
+                    [hasScrolled]="hasScrolled || !isHomePage || isMobileMenuOpen"></app-weather-widget>
                 <button id="mobile-menu-button" class="text-black focus:outline-none"
                     [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -42,17 +63,35 @@
                             d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
+                <div class="relative" (click)="toggleMenu()" *ngIf="isLoggedIn">
+                    <img src="../../../assets/images/smetovi-trees.jpg" alt="User Avatar" class="w-10 h-10 rounded-full cursor-pointer" />
+
+                    <div *ngIf="subMenuOpen"
+                        class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-md border z-10">
+                        <ul class="py-2">
+                            <li>
+                                <a routerLink="/dashboard" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-100">Admin</a>
+                            </li>
+                            <li>
+                                <a routerLink="/dashboard/postavke" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-100">Postavke</a>
+                            </li>
+                            <li>
+                                <a (click)="logout()" (click)="toggleMenu()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100">Odjava</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="sm:hidden hidden">
-        <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{exact: true}"
+        <a routerLink="/" routerLinkActive="text-blue-500 active-route" [routerLinkActiveOptions]="{exact: true}"
             class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain text-black">Početna</a>
-        <a routerLink="/lokacije" routerLinkActive="text-blue-500"
+        <a routerLink="/lokacije" routerLinkActive="text-blue-500 active-route"
             class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain text-black">Lokacije</a>
-        <a routerLink="/kontakt" routerLinkActive="text-blue-500"
+        <a routerLink="/kontakt" routerLinkActive="text-blue-500 active-route"
             class="block px-4 py-2 text-md font-medium hover:bg-gray-100 font-mountain text-black">Kontakt</a>
     </div>
 </nav>

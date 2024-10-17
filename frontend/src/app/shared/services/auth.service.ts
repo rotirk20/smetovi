@@ -6,12 +6,16 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  
   constructor(private http: HttpClient, private router: Router) {}
 
   signIn(email: string, password: string): Observable<boolean> {
@@ -21,6 +25,7 @@ export class AuthService {
         map((response) => {
           const token = response.token;
           localStorage.setItem('token', token);
+          this.isLoggedInSubject.next(true);
           return true; // Indicate successful login
         }),
         catchError((error: HttpErrorResponse) => {
@@ -36,9 +41,14 @@ export class AuthService {
     return !!token;
   }
 
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
   logOut() {
     // Remove the token on logout
     localStorage.removeItem('token');
+    this.isLoggedInSubject.next(false);
     this.router.navigate(['/prijava']);
   }
 }

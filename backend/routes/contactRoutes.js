@@ -11,6 +11,6 @@ const contactController = require('../controllers/contactController');
 // router.get("/:id", contactController.getMessageById);
 
 // POST route to handle contact form submission
-router.post('/contact', contactController.sendContactEmail);
+router.post('/send', contactController.sendContactEmail);
 
 module.exports = router;
