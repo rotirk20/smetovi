@@ -16,7 +16,16 @@
         "name": "Restoran 960",
         "description": "Restaurant 960",
         "image": "/assets/images/restoran_960.jpg",
-        "coordinates": { "lat": 44.242418, "lng": 17.97361 }
+        "coordinates": { "lat": 44.242418, "lng": 17.97361 },
+        "workingHours": [
+          { "day": "Ponedjeljak", "open": "10:00", "close": "22:00" },
+          { "day": "Utorak", "open": "10:00", "close": "22:00" },
+          { "day": "Srijeda", "open": "10:00", "close": "22:00" },
+          { "day": "Četvrtak", "open": "10:00", "close": "22:00" },
+          { "day": "Petak", "open": "10:00", "close": "22:00" },
+          { "day": "Subota", "open": "10:00", "close": "22:00" },
+          { "day": "Nedjelja", "open": "10:00", "close": "22:00" }
+        ]
       },
       {
         "name": "Dom Saveza Izviđača i Radioamatera",

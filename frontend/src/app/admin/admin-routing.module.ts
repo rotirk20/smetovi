@@ -4,9 +4,12 @@ import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-la
 import { LocationsComponent } from './pages/locations/locations.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { authGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: DashboardLayoutComponent, children: [
+  { path: '', component: DashboardLayoutComponent, 
+    canActivate: [authGuard], 
+    children: [
     { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirect to dashboard
     { path: 'home', component: DashboardComponent },
     { path: 'lokacije', component: LocationsComponent },

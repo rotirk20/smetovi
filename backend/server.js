@@ -6,11 +6,13 @@ const authRoutes = require('./routes/authRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const errorMiddleware = require('./middleware/errorMiddleware');
-
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 

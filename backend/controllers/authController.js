@@ -16,6 +16,18 @@ const register = async (req, res) => {
   }
 };
 
+const users = async (req, res) => {
+  try {
+    const allUsers = await User.findAll({
+      attributes: ['id', 'username', 'email'],
+    });
+    res.status(200).json(allUsers);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -54,4 +66,4 @@ const refreshToken = async (req, res) => {
   }
 };
 
-module.exports = { register, login, refreshToken };
+module.exports = { register, login, refreshToken, users };
