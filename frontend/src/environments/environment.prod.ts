@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://api.smetovi.ba/api'
+    apiUrl: 'https://api.smetovi.ba/api'
 };
