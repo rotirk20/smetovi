@@ -1,11 +1,12 @@
-class Category {
-  constructor(id, name, description, createdAt, updatedAt) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-}
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
+
+const Category = sequelize.define(
+  "Category",
+  {
+    name: { type: DataTypes.STRING, allowNull: false, unique: true },
+  },
+  { timestamps: true }
+);
 
 module.exports = Category;

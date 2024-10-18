@@ -9,11 +9,17 @@
             "request": "launch",
             "name": "Launch Program",
             "env": {
-                "DB_HOST": "localhost",
-                "DB_USER": "root",
-                "DB_PASSWORD": "",
-                "DB_NAME": "smetovi",
-                "PORT": "4001"
+                "DATABASE_URL":"postgresql://neondb_owner:nekYVhH8Tzo6@ep-holy-moon-a5i4sdfw-pooler.us-east-2.aws.neon.tech/smetovi?sslmode=require",
+                "JWT_SECRET":"mysueprsecret",
+                "JWT_REFRESH_SECRET":"myrefreshsupersecret",
+                "PORT":"4000",
+               "SMTP_HOST":"mail.smetovi.ba",
+                "SMTP_PORT":"465",
+                "SMTP_USER":"support@smetovi.ba",
+                "SMTP_PASS":"P8es3G[W=7m&",
+                "DEFAULT_SENDER_EMAIL":"support@smetovi.ba",
+                "DEFAULT_RECEIVER_EMAIL":"support@smetovi.ba",
+                "DEFAULT_RECEIVER_NAME":"Smetovi"
             },
             "skipFiles": [
                 "<node_internals>/**"

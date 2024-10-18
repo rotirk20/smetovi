@@ -1,7 +1,6 @@
-const express = require("express");
-const contactController = require("../controllers/contactController");
-
+const express = require('express');
 const router = express.Router();
+const contactController = require('../controllers/contactController');
 
 // GET methods for future use
 
@@ -11,7 +10,7 @@ const router = express.Router();
 // Get a specific message by ID (for future use)
 // router.get("/:id", contactController.getMessageById);
 
-// Route to send an email
-router.post("/send", contactController.sendEmail);
+// POST route to handle contact form submission
+router.post('/send', contactController.sendContactEmail);
 
 module.exports = router;

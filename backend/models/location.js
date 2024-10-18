@@ -1,27 +1,22 @@
-class Location {
-  constructor(
-    id,
-    name,
-    address,
-    description,
-    longitude,
-    latitude,
-    userId,
-    categoryId,
-    createdAt,
-    updatedAt
-  ) {
-    this.id = id;
-    this.name = name;
-    this.address = address;
-    this.description = description;
-    this.longitude = longitude;
-    this.latitude = latitude;
-    this.userId = userId;
-    this.categoryId = categoryId;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-}
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
+const Category = require("./category");
+const User = require("./user");
+
+const Location = sequelize.define(
+  "Location",
+  {
+    name: { type: DataTypes.STRING, allowNull: false },
+    address: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.STRING },
+    longitude: { type: DataTypes.FLOAT, allowNull: false },
+    latitude: { type: DataTypes.FLOAT, allowNull: false },
+    image: { type: DataTypes.STRING },
+  },
+  { timestamps: true }
+);
+
+Location.belongsTo(Category);
+Location.belongsTo(User);
 
 module.exports = Location;

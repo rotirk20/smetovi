@@ -1,12 +1,14 @@
-class User {
-  constructor(id, name, email, password, createdAt, updatedAt) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-}
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
+
+const User = sequelize.define(
+  "User",
+  {
+    username: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, allowNull: false, unique: true },
+    password: { type: DataTypes.STRING, allowNull: false },
+  },
+  { timestamps: true }
+);
 
 module.exports = User;
