@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string = '/';
   loginForm: FormGroup;
   errorMessage: string | undefined;
+  loading = false;
+  passwordVisible = false;
 
   constructor(
     private authService: AuthService,
@@ -30,11 +32,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.loading = true;
     const { username, password, rememberMe } = this.loginForm.value;
     this.authService
       .signIn(username, password)
       .subscribe({
         next: (success) => {
+          this.loading = false; // Stop loading when login is complete
           if (success) {
             // If login is successful, redirect to the returnUrl
             this.returnUrl =
@@ -46,6 +50,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (error: HttpErrorResponse) => {
+          this.loading = false; // Stop loading when login is complete
           // Handle HTTP error responses or other errors
           if (error.status === 404) {
             this.handleError('Korisnik ne postoji.');
@@ -63,6 +68,10 @@ export class LoginComponent implements OnInit {
     // Here, you can use a notification service, a modal, or update a variable
     // to display the error message in your template.
     this.errorMessage = message;
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 
   ngOnInit(): void {
