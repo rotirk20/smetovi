@@ -1,7 +1,7 @@
 {
     "locations": [
       {
-        "name": "Konjički klub 'Smet'",
+        "name": "Konjički klub Smet",
         "description": "Predstavlja savršeno mjesto za ljubitelje životinja i prirode. Osim konja, klub se ponosi velikim brojem različitih životinja, što ga čini pravim malim zoološkim vrtom. Posjetitelji mogu uživati u bliskom susretu s brojnim životinjama.",
         "type": "Rekreacija",
         "image": "/assets/images/smet.jpg",
@@ -41,7 +41,7 @@
         "name": "Planinarski dom Smet",
         "description": "Planinarski dom Smet se nalazi na nadmorskoj visini od 964 metara. Dom posjeduje restoran, salu, terasu, igralište, parkove za djecu te prostor za roštilj. Domom upravlja planinarsko društvo Željezara iz Zenice. Dom je otvoren tokom cijele godine.",
         "type": "Smještaj",
-        "image": "/assets/images/dom_saveza_izvidaca_i_radioamatera.jpg",
+        "image": "/assets/images/planinarski_dom_smet.jpg",
         "coordinates": { "lat": 44.247535, "lng": 17.971122 }
       }
     ]
