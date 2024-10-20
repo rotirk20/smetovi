@@ -17,13 +17,14 @@ export class WeatherWidget implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
+    const basePath = 'https://openweathermap.org/img/wn/'; // Path to your PNG icons
     // Start weather updates with a default interval of 15 minutes (can change dynamically)
     this.weatherService.startWeatherUpdates(15 * 60 * 1000);
 
     // Subscribe to the weather data observable
     this.weatherService.weather$.subscribe(data => {
       this.weatherData = data;
-      this.setWeatherIcon(data?.weather[0].main);
+      this.weatherIcon = basePath + data?.weather[0].icon + '.png';
     });
   }
 
@@ -32,25 +33,4 @@ export class WeatherWidget implements OnInit {
     this.weatherService.stopWeatherUpdates();
   }
 
-  setWeatherIcon(condition: string) {
-    // Set the icon path based on the weather condition
-    const basePath = 'assets/images/weather/'; // Path to your PNG icons
-    switch (condition) {
-      case 'Clear':
-        this.weatherIcon = `${basePath}sun.png`;
-        break;
-      case 'Clouds':
-        this.weatherIcon = `${basePath}cloud.png`;
-        break;
-      case 'Rain':
-        this.weatherIcon = `${basePath}cloud_rain.png`;
-        break;
-      case 'Snow':
-        this.weatherIcon = `${basePath}snow.png`;
-        break;
-      default:
-        this.weatherIcon = `${basePath}default.png`; // Default icon for unknown conditions
-    }
-    console.log(this.weatherIcon);
-  }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   ContactFormModel,
   ContactFormErrors,
-} from '../../../shared/models/contact-form.model';
+} from '../../../../shared/models/contact-form.model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService } from 'src/app/shared/services/contact.service';

@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ItemListComponent } from 'src/app/components/item-list/item-list.component';
+import { ItemListComponent } from 'src/app/home/components/item-list/item-list.component';
 import { Location } from 'src/app/shared/models/location.model';
 import { LocationService } from 'src/app/shared/services/location.service';
 import { Title, Meta } from '@angular/platform-browser';
