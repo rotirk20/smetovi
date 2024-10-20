@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocationCardComponent } from 'src/app/components/location-card/location-card.component';
+import { LocationCardComponent } from 'src/app/home/components/location-card/location-card.component';
 import { Location } from 'src/app/shared/models/location.model';
 import { GoogleMapsModule, MapMarker, MapInfoWindow } from '@angular/google-maps';
 import { InfoWindowContent } from 'src/app/shared/models/info-window.model';
