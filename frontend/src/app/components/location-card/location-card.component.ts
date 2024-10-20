@@ -1,11 +1,11 @@
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Location } from 'src/app/shared/models/location.model';
 
 @Component({
   selector: 'app-location-card',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, CommonModule],
   templateUrl: './location-card.component.html',
   styleUrls: ['./location-card.component.scss'],
 })

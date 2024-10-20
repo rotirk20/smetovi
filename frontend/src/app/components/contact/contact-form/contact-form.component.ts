@@ -3,7 +3,7 @@ import {
   ContactFormModel,
   ContactFormErrors,
 } from '../../../shared/models/contact-form.model';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService } from 'src/app/shared/services/contact.service';
 
@@ -72,7 +72,7 @@ export class ContactFormComponent {
         : '';
   }
 
-  submitForm() {
+  submitForm(form: NgForm) {
     this.validateForm();
     if (
       this.formErrors.name ||
@@ -87,6 +87,7 @@ export class ContactFormComponent {
       (response) => {
         console.log('Form data successfully submitted:', response);
         this.closeForm();
+        form.resetForm();
       },
       (error) => {
         console.error('Error submitting form:', error);
