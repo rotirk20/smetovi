@@ -1,0 +1,15 @@
+.location-list {
+    font-size: 10px;
+    .location-detail {
+        .description {
+            line-height: 1;
+        }
+        .location-type {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 10px;
+            line-height: 1;
+        }
+    }
+    
+}

@@ -19,7 +19,7 @@
 >
   <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
     <h2 class="text-2xl font-bold mb-4">Kontaktirajte nas</h2>
-    <form (ngSubmit)="submitForm()">
+    <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="name"
           >Ime i prezime *</label

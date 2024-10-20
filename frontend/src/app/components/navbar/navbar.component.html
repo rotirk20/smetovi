@@ -33,16 +33,16 @@
                     <img src="../../../assets/images/smetovi-trees.jpg" alt="User Avatar" class="w-10 h-10 rounded-full cursor-pointer" />
 
                     <div *ngIf="subMenuOpen"
-                        class="sub-menu absolute right-0 mt-2 w-48 bg-white rounded-sm shadow-sm border z-10">
+                        class="sub-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-md z-10">
                         <ul>
                             <li>
-                                <a routerLink="/dashboard" (click)="toggleMenu()" class="block px-8 py-2 hover:bg-gray-100">Admin</a>
+                                <a routerLink="/dashboard" (click)="toggleMenu()" class="rounded-md block px-8 py-2 hover:bg-gray-100">Admin</a>
                             </li>
                             <li>
-                                <a routerLink="/dashboard/postavke" (click)="toggleMenu()" class="block px-8 py-2 hover:bg-gray-100">Postavke</a>
+                                <a routerLink="/dashboard/postavke" (click)="toggleMenu()" class="rounded-md block px-8 py-2 hover:bg-gray-100">Postavke</a>
                             </li>
                             <li>
-                                <a (click)="logout()" (click)="toggleMenu()" class="cursor-pointer block px-8 py-2 hover:bg-gray-100">Odjava</a>
+                                <a (click)="logout()" (click)="toggleMenu()" class="rounded-md cursor-pointer block px-8 py-2 hover:bg-gray-100">Odjava</a>
                             </li>
                         </ul>
                     </div>
@@ -55,8 +55,9 @@
                 <!-- Weather Component (Visible on Mobile) -->
                 <app-weather-widget *ngIf="isMobileView"
                     [hasScrolled]="hasScrolled || !isHomePage || isMobileMenuOpen"></app-weather-widget>
-                <button id="mobile-menu-button" class="text-black focus:outline-none"
-                    [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen">
+                <button id="mobile-menu-button" class="focus:outline-none"
+                    [class.text-white]="isHomePage && !hasScrolled && !isMobileMenuOpen"
+                    [class.text-black]="!isHomePage && hasScrolled && isMobileMenuOpen">
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -67,16 +68,16 @@
                     <img src="../../../assets/images/smetovi-trees.jpg" alt="User Avatar" class="w-10 h-10 rounded-full cursor-pointer" />
 
                     <div *ngIf="subMenuOpen"
-                        class="sub-menu absolute right-0 mt-2 w-48 bg-white rounded-sm shadow-sm border z-10">
+                        class="sub-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-md z-10">
                         <ul>
                             <li>
-                                <a routerLink="/dashboard" (click)="toggleMenu()" class="block px-8 py-2 hover:bg-gray-100">Admin</a>
+                                <a routerLink="/dashboard" (click)="toggleMenu()" class="rounded-md block px-8 py-2 hover:bg-gray-100">Admin</a>
                             </li>
                             <li>
-                                <a routerLink="/dashboard/postavke" (click)="toggleMenu()" class="block px-8 py-2 hover:bg-gray-100">Postavke</a>
+                                <a routerLink="/dashboard/postavke" (click)="toggleMenu()" class="rounded-md block px-8 py-2 hover:bg-gray-100">Postavke</a>
                             </li>
                             <li>
-                                <a (click)="logout()" (click)="toggleMenu()" class="cursor-pointer block px-8 py-2 hover:bg-gray-100">Odjava</a>
+                                <a (click)="logout()" (click)="toggleMenu()" class="rounded-md cursor-pointer block px-8 py-2 hover:bg-gray-100">Odjava</a>
                             </li>
                         </ul>
                     </div>

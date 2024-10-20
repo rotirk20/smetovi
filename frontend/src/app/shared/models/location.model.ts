@@ -6,6 +6,7 @@ export interface WorkingHours {
 export interface Location {
   id: number;
   name: string;
+  description: string,
   address: string;
   type: string;
   image?: string;
