@@ -65,7 +65,7 @@ export class LocationComponent implements OnInit {
         this.locations = locations;
         this.loadMarkers();
       },
-      error: err => console.error('Observable emitted an error: ' + err),
+      error: err => this.loading = false,
       complete: () => this.loading = false
     });
   }
