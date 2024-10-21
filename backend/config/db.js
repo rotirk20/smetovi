@@ -3,7 +3,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const isProduction = process.env.NODE_ENV === 'production';
+const databaseUrl = isProduction ? process.env.DATABASE_URL : process.env.DEV_DATABASE_URL;
+
+const sequelize = new Sequelize(databaseUrl, {
   dialect: 'postgres',
   logging: false,
 });
