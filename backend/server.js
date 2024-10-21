@@ -29,8 +29,21 @@ const startServer = async () => {
   await initModels();
 
   const PORT = process.env.PORT || 5100;
-  app.listen(PORT, () => {
+  const FALLBACK_PORT = 5200;
+
+  const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`Port ${PORT} is already in use. Trying port ${FALLBACK_PORT}...`);
+      app.listen(FALLBACK_PORT, () => {
+        console.log(`Server is running on port ${FALLBACK_PORT}`);
+      });
+    } else {
+      console.error('Server error:', err);
+    }
   });
 };
 
